@@ -1,0 +1,8 @@
+graph-data.js
+__pycache__/
+.DS_Store
+Native/build/
+Native/DerivedData/
+*.xcuserstate
+xcuserdata/
+Native/LocalBuild/

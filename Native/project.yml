@@ -1,0 +1,50 @@
+name: VaultGraph
+options:
+  deploymentTarget:
+    macOS: "14.0"
+settings:
+  base:
+    SWIFT_VERSION: "5.0"
+    CODE_SIGN_STYLE: Automatic
+    ENABLE_APP_SANDBOX: YES
+    GENERATE_INFOPLIST_FILE: YES
+    MARKETING_VERSION: "0.1"
+    CURRENT_PROJECT_VERSION: "1"
+    ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+targets:
+  VaultGraph:
+    type: application
+    platform: macOS
+    sources: [App.swift, Graph.swift, AppIcon.icns, VaultGraphIcon.png, Assets.xcassets]
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: de.lajoshufnagel.VaultGraph.Local
+        CODE_SIGN_ENTITLEMENTS: App.entitlements
+        INFOPLIST_KEY_CFBundleDisplayName: Vault Graph
+    info:
+      path: App-Info.plist
+      properties:
+        CFBundleIconFile: AppIcon.icns
+        CFBundleIconName: AppIcon
+        CFBundleURLTypes:
+          - CFBundleURLName: Vault Graph
+            CFBundleURLSchemes: [vaultgraph]
+    dependencies:
+      - target: VaultGraphWidget
+        embed: true
+  VaultGraphWidget:
+    type: app-extension
+    platform: macOS
+    sources: [Widget.swift, Graph.swift, AppIcon.icns, VaultGraphIcon.png, Assets.xcassets]
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: de.lajoshufnagel.VaultGraph.Local.Widget
+        CODE_SIGN_ENTITLEMENTS: Widget.entitlements
+        SKIP_INSTALL: YES
+    info:
+      path: Widget-Info.plist
+      properties:
+        CFBundleIconFile: AppIcon.icns
+        CFBundleIconName: AppIcon
+        NSExtension:
+          NSExtensionPointIdentifier: com.apple.widgetkit-extension
